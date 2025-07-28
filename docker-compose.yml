@@ -1,0 +1,20 @@
+services:
+  mongo:
+    image: mongo:4.4
+    env_file:
+      - .env
+    ports:
+      - "${MONGO_PORT}:27017"
+    volumes:
+      - ./mongo-data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "${ME_CONFIG_MONGODB_HOST}:4000"
+    env_file:
+      - .env
+
+volumes:
+  mongo-data:
